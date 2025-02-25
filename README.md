@@ -5,7 +5,7 @@
 ## 安装
 
 ```shell
-npm install @falconTracker/sdk --save-dev
+npm install @falconfracker/sdk --save-dev
 ```
 
 ## 简单使用
@@ -13,7 +13,7 @@ npm install @falconTracker/sdk --save-dev
 只需要配置服务端地址，就可以将错误直接上报到服务器中。
 
 ```js
-import { init } from "@falconTracker/sdk";
+import { init } from "@falconfracker/sdk";
 
 init({
   endpoint: 'http://xxx',
