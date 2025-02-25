@@ -1,5 +1,5 @@
 {
-  "name": "@falconTracker/sdk",
+  "name": "@falcontracker/sdk",
   "version": "0.0.1",
   "description": "",
   "main": "./src/index.ts",
@@ -47,6 +47,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/falconTracker/sdk"
+    "url": "git+https://github.com/falconTracker/sdk.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
