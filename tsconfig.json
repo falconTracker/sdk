@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "target": "es2020",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "bundler",
+    "baseUrl": "./",
+    "outDir": "temp",
+    "esModuleInterop": true,
+  },
+  "include": ["globals.d.ts", "src/"],
+}

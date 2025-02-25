@@ -1,0 +1,52 @@
+{
+  "name": "@falconTracker/sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "build": "npx rollup --config rollup.config.ts --configPlugin typescript",
+    "build-dts": "npx tsc && npx rollup  -c rollup.dts.config.js",
+    "lint": "npx eslint . --fix"
+  },
+  "type": "module",
+  "keywords": [
+    "hawkEye",
+    "performance",
+    "error",
+    "collect"
+  ],
+  "author": "leopordlau",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/node": "^22.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.3.3",
+    "rollup": "^4.19.2",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "ts-loader": "^9.5.1",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "error-stack-parser": "^2.1.4",
+    "web-vitals": "^4.2.3"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,json}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/falconTracker/sdk"
+  }
+}
