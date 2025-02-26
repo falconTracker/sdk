@@ -1,4 +1,3 @@
-import { commonFieldPlugin } from "./commonField";
 import { elementParserPlugin } from "./elementParser";
 import { UserConfig } from "../config";
 import { userBehaviorPlugin } from "./userBehavior";
@@ -14,7 +13,6 @@ export async function resolvePlugins(
     elementParserPlugin(),
     userBehaviorPlugin(),
     errorParsePlugin(),
-    commonFieldPlugin(config),
     ...userPlugins,
     reportPlugin(config),
   ].filter(Boolean) as Plugin[];

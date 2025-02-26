@@ -1,11 +1,12 @@
+import { FullData } from "./collect";
 import { ResolvedConfig } from "./config";
 import { isEmpty } from "./utils";
 
 export interface PluginContainer {
-  emit: (data: any) => Promise<any>;
-  load: (data: any) => any;
-  transform: (data: any) => void | Promise<any>;
-  end: (data: any) => void;
+  emit: (data: FullData) => Promise<any>;
+  load: (data: FullData) => any;
+  transform: (data: FullData) => void | Promise<any>;
+  end: (data: FullData) => void;
 }
 
 export async function createPluginContainer(

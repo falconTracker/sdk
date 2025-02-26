@@ -30,9 +30,8 @@ export interface UserConfig {
   collectors?: CollectorOptions;
   plugins?: Plugin[];
   SDKVersion?: string;
+  extra?: Record<string, any>;
 }
-
-export type PluginOption = Plugin | Promise<Plugin | PluginOption[]>;
 
 export type ResolvedConfig = Readonly<
   Omit<UserConfig, "plugins"> & {
@@ -58,7 +57,7 @@ const defaultConfig: UserConfig = {
       collect: true,
       repeat: true,
     },
-    behavior: true
+    behavior: true,
   },
   SDKVersion: version,
 };
@@ -79,7 +78,7 @@ export async function resolveConfig(
   userConfig = mergeConfig(defaultConfig, userConfig) as UserConfig;
   if (isDSNCorrect(userConfig.endpoint)) {
     console.warn(
-      `[HawkEye warn]: Endpoint: ${userConfig.endpoint} is invalid. \nReport feature is now disabled.`
+      `[FalconTracker warn]: Endpoint: ${userConfig.endpoint} is invalid. \nReport feature is now disabled.`
     );
     userConfig.send = false;
   }

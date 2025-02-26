@@ -1,8 +1,8 @@
-import { HawkEye } from ".";
+import { FalconTracker } from ".";
 import { getCurrentLocationHref, toRawType } from "./utils";
 import { CATEGORY, ErrorType } from "./utils/constant";
 
-export function listenError(instance: HawkEye) {
+export function listenError(instance: FalconTracker) {
   const jsError = instance.config.collectors?.jsError;
 
   if (!jsError?.collect) {

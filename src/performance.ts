@@ -10,7 +10,7 @@ import {
   onINP,
   INPMetric,
 } from "web-vitals";
-import { HawkEye } from ".";
+import { FalconTracker } from ".";
 import { getCurrentLocationHref, isEmpty, on } from "./utils";
 import { CATEGORY, PerformanceType } from "./utils/constant";
 
@@ -41,7 +41,7 @@ function getCoreMetric(callback: MetricCallback) {
   onTTFB(callback);
 }
 
-export function listenPerformance(instance: HawkEye) {
+export function listenPerformance(instance: FalconTracker) {
   if (!instance.config.collectors?.performance) {
     return;
   }

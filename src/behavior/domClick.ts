@@ -1,8 +1,8 @@
-import { HawkEye } from "..";
+import { FalconTracker } from "..";
 import { getCurrentLocationHref, on, throttle } from "../utils";
 import { CATEGORY, UserBehaviorType } from "../utils/constant";
 
-export function listenUIClick(instance: HawkEye) {
+export function listenUIClick(instance: FalconTracker) {
   if (!instance.config.collectors?.behavior) {
     return;
   }

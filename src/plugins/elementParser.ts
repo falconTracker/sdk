@@ -29,7 +29,7 @@ export function elementParserPlugin(): Plugin {
   }
 
   return {
-    name: "hawkEye-elementParser",
+    name: "falconTracker-elementParser",
     load(data: CollectData) {
       if (
         data.category === CATEGORY.BEHAVIOR &&

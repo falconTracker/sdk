@@ -72,7 +72,7 @@ export class UserBehavior {
 export function userBehaviorPlugin(): Plugin {
   let userBehavior: UserBehavior;
   return {
-    name: "hawkEye-userBehavior",
+    name: "falconTracker-userBehavior",
     configResolved(config) {
       if (config.collectors?.behavior) {
         userBehavior = new UserBehavior();

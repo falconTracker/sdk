@@ -94,7 +94,7 @@ class TransportData {
 export function reportPlugin(config: UserConfig): Plugin {
   const transport = new TransportData(config);
   return {
-    name: 'hawkEye-report',
+    name: 'falconTracker-report',
     end(data) {
         if(config.send != null) {
             if(typeof config.send === 'function') {

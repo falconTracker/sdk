@@ -1,4 +1,4 @@
-import { CollectData } from "./collect";
+import { FullData } from "./collect";
 import { ResolvedConfig, UserConfig } from "./config";
 
 export interface Plugin {
@@ -11,13 +11,14 @@ export interface Plugin {
   configResolved?: (config: ResolvedConfig) => void | Promise<void>;
 
   // 用于监听收集的数据
-  emit?: (data: CollectData) => void;
+  emit?: (data: FullData) => void;
 
   // 通过返回值可以在数据中添加的额外字段
-  load?: (data: CollectData) => any;
-
+  load?: (data: FullData) => any;
+  
   // 数据转换
-  transform?: (data: CollectData) => any;
-
-  end?: (data: CollectData) => any;
+  transform?: (data: FullData) => any;
+  
+  // 数据处理结束时的钩子，data 类型由实现者决定
+  end?: (data: FullData) => void;
 }

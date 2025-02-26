@@ -1,4 +1,4 @@
-import { HawkEye } from "..";
+import { FalconTracker } from "..";
 import { getCurrentLocationHref, on } from "../utils";
 import { CATEGORY, UserBehaviorType } from "../utils/constant";
 
@@ -32,7 +32,7 @@ function replacer<T>(
   }
 }
 
-export function listenNavigationChange(instance: HawkEye) {
+export function listenNavigationChange(instance: FalconTracker) {
   if (!instance.config.collectors?.behavior) {
     return;
   }

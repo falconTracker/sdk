@@ -1,4 +1,4 @@
-import { HawkEye } from "..";
+import { FalconTracker } from "..";
 import { getCurrentLocationHref, isEmpty } from "../utils";
 import { CATEGORY, ErrorType, UserBehaviorType } from "../utils/constant";
 
@@ -23,7 +23,7 @@ type RequestData = {
   params: string;
 };
 
-export function listenAPI(instance: HawkEye) {
+export function listenAPI(instance: FalconTracker) {
   if (!instance.config.collectors?.api) {
     return;
   }
@@ -149,7 +149,7 @@ function getRequest(
 }
 
 function rewriteFetch(
-  instance: HawkEye,
+  instance: FalconTracker,
   _collect: (url: string, response: ResponseData, request: RequestData, status: boolean) => void
 ) {
   if (!("fetch" in globalThis)) {
@@ -237,7 +237,7 @@ function parseXHRBody(body: Document | XMLHttpRequestBodyInit): string {
 }
 
 function rewriteXHR(
-  instance: HawkEye,
+  instance: FalconTracker,
   _collect: (url: string, response: ResponseData, request: RequestData, status: boolean) => void
 ) {
   if (!("XMLHttpRequest" in globalThis)) {

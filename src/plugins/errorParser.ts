@@ -160,7 +160,7 @@ export function errorParsePlugin(): Plugin {
   }
 
   return {
-    name: "hawkEye-errorParse",
+    name: "falconTracker-errorParse",
     configResolved(config) {
       resolved = config;
     },
