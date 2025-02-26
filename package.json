@@ -1,8 +1,9 @@
 {
   "name": "@falcontracker/sdk",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
-  "main": "./src/index.ts",
+  "main": "./dist/index.min.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "npx rollup --config rollup.config.ts --configPlugin typescript",
     "build-dts": "npx tsc && npx rollup  -c rollup.dts.config.js",
@@ -10,7 +11,7 @@
   },
   "type": "module",
   "keywords": [
-    "hawkEye",
+    "falconTracker",
     "performance",
     "error",
     "collect"
@@ -52,5 +53,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "files": ["dist"]
 }
