@@ -2,7 +2,6 @@ import { getPreUrl } from "./behavior/navigate";
 import { ResolvedConfig } from "./config";
 import { PluginContainer } from "./pluginContainer";
 import { createRandomString, nextLoop, on } from "./utils";
-import type { StackFrame} from "error-stack-parser";
 import {
   CATEGORY,
   ErrorType,
@@ -42,7 +41,7 @@ export interface PerformanceMetric extends BasicCollectData {
   };
 }
 
-export interface BehaviorNavigation extends BasicCollectData {
+export interface NavigationData extends BasicCollectData {
   category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.NAVIGATION;
   data: {
@@ -51,14 +50,14 @@ export interface BehaviorNavigation extends BasicCollectData {
   };
 }
 
-export interface BehaviorUIClick extends BasicCollectData {
+export interface UIClickData extends BasicCollectData {
   category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.UICLICK;
   event: PointerEvent;
 }
 
-export interface BehaviorRequest extends BasicCollectData {
-  category: CATEGORY.API | CATEGORY.BEHAVIOR;
+export interface RequestData extends BasicCollectData {
+  category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.REQUEST;
   data: {
     resource: PerformanceResourceTiming;
@@ -80,22 +79,21 @@ export interface ErrorUnhandledRejection extends ErrorDataBase {
   type: ErrorType.UNHANDLEDREJECTION;
   error: PromiseRejectionEvent;
   traceId?: string;
-  behaviorList?: CollectBehavior[];
   message?: string;
-  stackFrames?: StackFrame[];
+  // TODO
+  stackFrames?: any[];
 }
 
 export interface ErrorErrorEvent extends ErrorDataBase {
   type: ErrorType.ERROR;
   error: ErrorEvent;
   traceId?: string;
-  behaviorList?: CollectBehavior[];
   message?: string;
-  stackFrames?: StackFrame[];
+  stackFrames?: any[];
 }
 
 export interface ErrorResourceError extends ErrorDataBase {
-  type: ErrorType.RESOURCEERROR;
+  type: ErrorType.RESOURCE;
   error: Event;
   traceId?: string;
   message?: string;
@@ -114,6 +112,7 @@ export interface ErrorRequestError extends ErrorDataBase {
     statusText: string;
     method: string;
     params: string;
+    message: string;
   };
 }
 
@@ -123,18 +122,14 @@ export type ErrorData =
   | ErrorResourceError
   | ErrorRequestError;
 
-export type CollectBehavior =
-  | BehaviorNavigation
-  | BehaviorUIClick
-  | BehaviorRequest;
 
 export type CollectData =
   | PerformanceResource
   | PerformanceMetric
   | ErrorData
-  | BehaviorNavigation
-  | BehaviorUIClick
-  | BehaviorRequest;
+  | NavigationData
+  | UIClickData
+  | RequestData;
 
   let result: UserAgentInfo;
 

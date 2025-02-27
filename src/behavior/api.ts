@@ -46,6 +46,7 @@ export function listenAPI(instance: FalconTracker) {
             resource: resourceTiming,
             status: resourceTiming.responseStatus,
             statusText: response.statusText || 'error',
+            message: response.message || 'Failed to request',
             method: request.method,
             params: request.params,
           },
@@ -53,7 +54,7 @@ export function listenAPI(instance: FalconTracker) {
         });
       } else {
         collect({
-          category: CATEGORY.API,
+          category: CATEGORY.BEHAVIOR,
           type: UserBehaviorType.REQUEST,
           timeStamp: Date.now(),
           data: {
@@ -78,6 +79,7 @@ export function listenAPI(instance: FalconTracker) {
           resource: resourceTiming,
           status: response.status,
           statusText: response.statusText,
+          message: response.message || 'Failed to request',
           method: request.method,
           params: request.params,
         },
@@ -92,7 +94,6 @@ export function listenAPI(instance: FalconTracker) {
 
 function getLastResourceTimingByUrl(url: string) {
   const resources = performance.getEntriesByType("resource");
-  // TODO 适配 axios
   const list = resources.filter((entry) => entry.name === url || entry.name.includes(url));
   if (list.length >= 1) {
     return list[list.length - 1];
@@ -192,17 +193,16 @@ function rewriteFetch(
         return res;
       },
       (err: Error) => {
-        // TODO 就是一个错误，不能通过用户行为收集
         _collect(
           url,
           {
             contentLength: 0,
             status: -1,
-            statusText: "Fail to fetch",
+            statusText: "error",
             message: err.message,
           },
           getRequest(input, init),
-           false
+          false
         );
         throw err;
       }

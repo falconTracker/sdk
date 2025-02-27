@@ -1,9 +1,7 @@
 export enum CATEGORY {
   PERFORMANCE = "performance",
   ERROR = "error",
-  WHITE_SCREEN = "whiteScreen",
-  BEHAVIOR = "behavior",
-  API = "API"
+  BEHAVIOR = "behavior"
 }
 
 export enum UserBehaviorType {
@@ -20,7 +18,7 @@ export enum PerformanceType {
 export enum ErrorType {
   UNHANDLEDREJECTION = "unhandledrejection",
   ERROR = "error",
-  RESOURCEERROR = "resourceError",
+  RESOURCE = "resource",
   REQUEST = 'request'
 }
 

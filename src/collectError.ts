@@ -13,7 +13,7 @@ export function listenError(instance: FalconTracker) {
     if (toRawType(e) === "Event") {
       instance.collect({
         category: CATEGORY.ERROR,
-        type: ErrorType.RESOURCEERROR,
+        type: ErrorType.RESOURCE,
         error: e as Event,
         url: getCurrentLocationHref(),
         timeStamp: Date.now(),

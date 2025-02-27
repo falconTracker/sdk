@@ -1,5 +1,5 @@
 import ErrorStackParser from "error-stack-parser";
-import { CATEGORY } from "../utils/constant";
+import { CATEGORY, ErrorType } from "../utils/constant";
 import { Plugin } from "../plugin";
 import { ResolvedConfig } from "../config";
 import { mergeConfig } from "../utils";
@@ -168,9 +168,9 @@ export function errorParsePlugin(): Plugin {
     load(data: CollectData) {
       if (data.category === CATEGORY.ERROR) {
         let result = {};
-        if (data.type === "error" || data.type === "unhandledrejection") {
+        if (data.type === ErrorType.ERROR || data.type === ErrorType.UNHANDLEDREJECTION) {
           result = duplicate(data.type, data.error);
-        } else if (data.type === "resourceError") {
+        } else if (data.type === ErrorType.RESOURCE) {
           result = errorParser(data.error, data.type);
         }
 
