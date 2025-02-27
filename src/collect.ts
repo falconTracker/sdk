@@ -2,6 +2,7 @@ import { getPreUrl } from "./behavior/navigate";
 import { ResolvedConfig } from "./config";
 import { PluginContainer } from "./pluginContainer";
 import { createRandomString, nextLoop, on } from "./utils";
+import type { StackFrame} from "error-stack-parser";
 import {
   CATEGORY,
   ErrorType,
@@ -20,7 +21,10 @@ interface BasicCollectData {
   url: string;
 }
 
+export type ResourceTargetType = "script" | "img" | "link" | "";
+
 export interface PerformanceResource extends BasicCollectData {
+  category: CATEGORY.PERFORMANCE;
   type: PerformanceType.RESOURCE;
   navigationType?: NavigationTimingType;
   navigationTiming?: PerformanceNavigationTiming;
@@ -29,6 +33,7 @@ export interface PerformanceResource extends BasicCollectData {
 }
 
 export interface PerformanceMetric extends BasicCollectData {
+  category: CATEGORY.PERFORMANCE;
   type: PerformanceType.METRIC;
   metric: {
     name: "LCP" | "CLS" | "FCP" | "TTFB" | "INP";
@@ -38,6 +43,7 @@ export interface PerformanceMetric extends BasicCollectData {
 }
 
 export interface BehaviorNavigation extends BasicCollectData {
+  category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.NAVIGATION;
   data: {
     from: string;
@@ -46,14 +52,16 @@ export interface BehaviorNavigation extends BasicCollectData {
 }
 
 export interface BehaviorUIClick extends BasicCollectData {
+  category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.UICLICK;
   event: PointerEvent;
 }
 
 export interface BehaviorRequest extends BasicCollectData {
+  category: CATEGORY.API | CATEGORY.BEHAVIOR;
   type: UserBehaviorType.REQUEST;
   data: {
-    resource: any;
+    resource: PerformanceResourceTiming;
     status: number;
     statusText: string;
     message: string;
@@ -64,31 +72,56 @@ export interface BehaviorRequest extends BasicCollectData {
   }
 }
 
-export type ErrorData = (
-  | {
-      type: ErrorType.UNHANDLEDREJECTION;
-      error: PromiseRejectionEvent;
-    }
-  | {
-      type: ErrorType.ERROR;
-      error: ErrorEvent;
-    }
-  | {
-      type: ErrorType.RESOURCEERROR;
-      error: Event;
-    }
-  | {
-    type: ErrorType.REQUEST;
-    data: {
-      resource: PerformanceResourceTiming;
-      status: number;
-      text: string;
-      method: string;
-      params: string;
-    }
-  }
-) &
-  BasicCollectData;
+export interface ErrorDataBase extends BasicCollectData {
+  category: CATEGORY.ERROR;
+}
+
+export interface ErrorUnhandledRejection extends ErrorDataBase {
+  type: ErrorType.UNHANDLEDREJECTION;
+  error: PromiseRejectionEvent;
+  traceId?: string;
+  behaviorList?: CollectBehavior[];
+  message?: string;
+  stackFrames?: StackFrame[];
+}
+
+export interface ErrorErrorEvent extends ErrorDataBase {
+  type: ErrorType.ERROR;
+  error: ErrorEvent;
+  traceId?: string;
+  behaviorList?: CollectBehavior[];
+  message?: string;
+  stackFrames?: StackFrame[];
+}
+
+export interface ErrorResourceError extends ErrorDataBase {
+  type: ErrorType.RESOURCEERROR;
+  error: Event;
+  traceId?: string;
+  message?: string;
+  target?: {
+    type: ResourceTargetType;
+    filename: string;
+  };
+}
+
+export interface ErrorRequestError extends ErrorDataBase {
+  type: ErrorType.REQUEST;
+  traceId?: string;
+  data: {
+    resource: PerformanceResourceTiming;
+    status: number;
+    statusText: string;
+    method: string;
+    params: string;
+  };
+}
+
+export type ErrorData =
+  | ErrorUnhandledRejection
+  | ErrorErrorEvent
+  | ErrorResourceError
+  | ErrorRequestError;
 
 export type CollectBehavior =
   | BehaviorNavigation

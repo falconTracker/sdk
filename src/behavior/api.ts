@@ -45,7 +45,7 @@ export function listenAPI(instance: FalconTracker) {
           data: {
             resource: resourceTiming,
             status: resourceTiming.responseStatus,
-            text: response.statusText || 'error',
+            statusText: response.statusText || 'error',
             method: request.method,
             params: request.params,
           },
@@ -77,7 +77,7 @@ export function listenAPI(instance: FalconTracker) {
         data: {
           resource: resourceTiming,
           status: response.status,
-          text: response.statusText,
+          statusText: response.statusText,
           method: request.method,
           params: request.params,
         },
