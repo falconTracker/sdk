@@ -1,6 +1,5 @@
 import { elementParserPlugin } from "./elementParser";
 import { UserConfig } from "../config";
-import { userBehaviorPlugin } from "./userBehavior";
 import { errorParsePlugin } from "./errorParser";
 import { Plugin } from "../plugin";
 import { reportPlugin } from "./report";
@@ -11,7 +10,6 @@ export async function resolvePlugins(
 ): Promise<Plugin[]> {
   return [
     elementParserPlugin(),
-    userBehaviorPlugin(),
     errorParsePlugin(),
     ...userPlugins,
     reportPlugin(config),
