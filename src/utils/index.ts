@@ -85,7 +85,7 @@ export function nextLoop(
   }
 }
 
-function createUUID() {
+export function createUUID() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0,
       v = c === "x" ? r : (r & 0x3) | 0x8;
@@ -102,10 +102,6 @@ export function createRandomString(length: number | undefined) {
     result += $chars.charAt(Math.floor(Math.random() * maxPos));
   }
   return result + Date.now();
-}
-
-export function generateTraceId() {
-  return createUUID();
 }
 
 export function generateSessionId(userId: string) {

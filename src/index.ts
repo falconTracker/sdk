@@ -25,13 +25,26 @@ export type * from './utils/constant';
 export type {
   FullData,
   CollectData,
-  CollectBehavior,
   ErrorData,
   PerformanceResource,
   PerformanceMetric,
-  BehaviorNavigation,
-  BehaviorUIClick,BehaviorRequest
+  NavigationData,
+  UIClickData,
+  RequestData
 } from './collect';
+export {
+  generateSessionId,
+  createUUID,
+  onBFCacheRestore,
+  on,
+  off,
+  onInvisiable,
+  toRawType,
+  nextLoop,
+  createRandomString,
+  throttle,
+  isEmpty
+} from './utils/index'
 
 
 async function _createFalconTracker(options: UserConfig) {
