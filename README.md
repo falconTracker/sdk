@@ -112,7 +112,7 @@ init({
 - - 点击事件
 - - - chain：被点击元素的路径，从 body 开始，按照最外层的元素一直往内的链，比如 `<div class="wrapper" id="parent"><a class="inner" id="son"></a></div>`，点击标签a时的链为 `div#parent.wrapper > a#son.inner`，# 字符后的为标签 id，. 字符后的为标签的类名，存在多个类名时会按照 `.xx.xxx` 进行链接。 id 和 class 为空时，默认存在 `#.`
 - screenWidth：页面宽度
-- screenHeight：页面宽度
+- screenHeight：页面高度
 - SDKVersion：sdk 版本号
 
 ## 数据示例
@@ -120,7 +120,7 @@ init({
 上面展示的数据字段总览包含了全部的参数，但是实际上不同类型的数据字段不同
 
 ### 页面性能
-
+ 
 ```js
 {
     appId: 'xxx',
@@ -131,7 +131,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
-    pre_url: 'http://xxx.com/a',
+    preUrl: 'http://xxx.com/a',
     entries: [
       {
         connectEnd: 20.700000047683716,
@@ -175,7 +175,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -191,6 +193,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     metric: {
       name: 'FCP',
       rating: 'good',
@@ -204,7 +207,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -221,6 +226,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     data: {
       contentLength: 42,
       message: "{\"code\":401,\"msg\":\"登录状态已过期\"}",
@@ -246,7 +252,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -262,6 +270,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     data: {
       chain: 'div#. > button#.'
     },
@@ -280,7 +289,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -296,6 +307,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     data: {
       from: 'http://xxx.com/b',
       to: 'http://xxx.com/a'
@@ -308,7 +320,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -324,7 +338,7 @@ init({
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
     url: 'http://xxx.com/b',
-    traceId: '252b6a98-4c9b-4113-873f-8b430043d2b3',
+    preUrl: 'http://xxx.com/a',
     data: {
       method: "GET",
       params: "",
@@ -349,7 +363,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -364,8 +380,8 @@ init({
     markUser: 'ISq8gNXMBv1740628511799',
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
-    traceId: '252b6a98-4c9b-4113-873f-8b430043d2b3',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     error: {
       isTrusted: true,
       bubbles: false,
@@ -373,11 +389,6 @@ init({
       ...
       // 更多可以查看 PromiseRejectionEvent 
     },
-    behaviorList: [
-      {
-        TODO behavior 里的数据过滤
-      }
-    ],
     stackFrames: [
       {
         columnNumber: 9
@@ -387,6 +398,7 @@ init({
         source: "    at throwError (http://xxx.com/index.js:211:9)"
       }
     ],
+    message: "xxx is not defined",
     SDKVersion: '0.0.4',
     agentInfo: {
       browser: "Chrome",
@@ -395,7 +407,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -410,8 +424,8 @@ init({
     markUser: 'ISq8gNXMBv1740628511799',
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
-    traceId: '252b6a98-4c9b-4113-873f-8b430043d2b3',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     error: {
       isTrusted: true,
       bubbles: false,
@@ -419,12 +433,6 @@ init({
       ...
       // 更多可以查看 ErrorEvent 
     },
-    behaviorList: [
-      {
-        // TODO behavior 里的数据过滤
-        // TODO 这些数据不应该放到这里，应该单独写个插件
-      }
-    ],
     stackFrames: [
       {
         columnNumber: 9
@@ -434,6 +442,7 @@ init({
         source: "    at throwError (http://xxx.com/index.js:211:9)"
       }
     ],
+    message: "xxx is not defined",
     SDKVersion: '0.0.4',
     agentInfo: {
       browser: "Chrome",
@@ -442,7 +451,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
@@ -453,13 +464,12 @@ init({
     appId: 'xxx',
     timeStamp: 12345678,
     catagory: 'error',
-    // TODO 去掉 Error
     type: 'resource',
     markUser: 'ISq8gNXMBv1740628511799',
     markUv: '5wAVeIdMXt1740628511799',
     markPage: 'gt3E7cFACa1740641321522',
-    traceId: '252b6a98-4c9b-4113-873f-8b430043d2b3',
     url: 'http://xxx.com/b',
+    preUrl: 'http://xxx.com/a',
     error: {
       isTrusted: true,
       bubbles: false,
@@ -467,6 +477,7 @@ init({
       ...
       // 更多可以查看 Event 
     },
+    message: 'script not found',
     target: {
       filename: 'http://xxx.com/main.js',
       type: 'script'
@@ -479,7 +490,9 @@ init({
       os_version: "10.0",
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0",
       version: "133.0.0.0"
-    }
+    },
+    screenWidth: 1080,
+    screenHeight: 960
 }
 ```
 
