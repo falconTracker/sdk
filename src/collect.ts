@@ -54,6 +54,9 @@ export interface UIClickData extends BasicCollectData {
   category: CATEGORY.BEHAVIOR;
   type: UserBehaviorType.UICLICK;
   event: PointerEvent;
+  data?: {
+    chain: string
+  }
 }
 
 export interface RequestData extends BasicCollectData {
@@ -78,7 +81,6 @@ export interface ErrorDataBase extends BasicCollectData {
 export interface ErrorUnhandledRejection extends ErrorDataBase {
   type: ErrorType.UNHANDLEDREJECTION;
   error: PromiseRejectionEvent;
-  traceId?: string;
   message?: string;
   // TODO
   stackFrames?: any[];
@@ -87,7 +89,6 @@ export interface ErrorUnhandledRejection extends ErrorDataBase {
 export interface ErrorErrorEvent extends ErrorDataBase {
   type: ErrorType.ERROR;
   error: ErrorEvent;
-  traceId?: string;
   message?: string;
   stackFrames?: any[];
 }
@@ -95,7 +96,6 @@ export interface ErrorErrorEvent extends ErrorDataBase {
 export interface ErrorResourceError extends ErrorDataBase {
   type: ErrorType.RESOURCE;
   error: Event;
-  traceId?: string;
   message?: string;
   target?: {
     type: ResourceTargetType;
@@ -105,7 +105,6 @@ export interface ErrorResourceError extends ErrorDataBase {
 
 export interface ErrorRequestError extends ErrorDataBase {
   type: ErrorType.REQUEST;
-  traceId?: string;
   data: {
     resource: PerformanceResourceTiming;
     status: number;

@@ -7,18 +7,6 @@ import { CollectData } from "src/collect";
 
 const errorMap = new Set();
 
-interface BaseError {
-  message: string;
-  timeStamp: number;
-  traceId: string;
-}
-
-interface CustomError {
-  type: "custom";
-  message: string;
-  stackFrames: StackFrame[];
-}
-
 type ResourceTargetType = "script" | "img" | "link" | "";
 
 interface ResourceError {
@@ -34,21 +22,18 @@ interface JSError {
   stackFrames: StackFrame[];
 }
 
-export type ErrorCollectEvent = BaseError &
-  (JSError | ResourceError | CustomError);
-
 function parseError(
-  type: "error" | "unhandledrejection",
+  type: ErrorType.ERROR | ErrorType.UNHANDLEDREJECTION,
   e: ErrorEvent | PromiseRejectionEvent
 ): JSError {
   let stackFrames: StackFrame[] = [];
   let message = "";
-  if (type === "error" || type === "unhandledrejection") {
+  if (type === ErrorType.ERROR || type === ErrorType.UNHANDLEDREJECTION) {
     let error: any;
-    if (type === "error") {
+    if (type === ErrorType.ERROR) {
       error = (e as ErrorEvent).error;
     }
-    if (type === "unhandledrejection") {
+    if (type === ErrorType.UNHANDLEDREJECTION) {
       error = (e as PromiseRejectionEvent).reason;
     }
     message = error.message;
@@ -104,11 +89,11 @@ function getErrorUid(input: string): string {
 function getErrorString(type: string, e: ErrorEvent | PromiseRejectionEvent) {
   let error,
     fingerprint = "";
-  if (type === "error") {
+  if (type === ErrorType.ERROR) {
     fingerprint += `${type}-${(e as ErrorEvent).error.message}-`;
     error = (e as ErrorEvent).error;
   }
-  if (type === "unhandledrejection") {
+  if (type === ErrorType.UNHANDLEDREJECTION) {
     fingerprint += `${type}-${(e as PromiseRejectionEvent).reason.message}-`;
     error = (e as PromiseRejectionEvent).reason;
   }
@@ -144,14 +129,14 @@ export function errorParsePlugin(): Plugin {
     type: string
   ) {
     let error: JSError | ResourceError;
-    if (type === "unhandledrejection") {
-      error = parseError("unhandledrejection", e as PromiseRejectionEvent);
+    if (type === ErrorType.UNHANDLEDREJECTION) {
+      error = parseError(ErrorType.UNHANDLEDREJECTION, e as PromiseRejectionEvent);
     }
-    if (type === "error") {
-      error = parseError("error", e as ErrorEvent);
+    if (type === ErrorType.ERROR) {
+      error = parseError(ErrorType.ERROR, e as ErrorEvent);
     }
 
-    if (type === "resourceError") {
+    if (type === ErrorType.RESOURCE) {
       error = parseResourceError(e);
       return error;
     }
