@@ -19,13 +19,16 @@ export function listenError(instance: FalconTracker) {
         timeStamp: Date.now(),
       });
     } else {
-      instance.collect({
-        category: CATEGORY.ERROR,
-        type: ErrorType.ERROR,
-        error: e as ErrorEvent,
-        url: getCurrentLocationHref(),
-        timeStamp: Date.now(),
-      });
+      // 通过标签加载的资源内的报错，error 为 null，无法解析
+      if((e as ErrorEvent).error) {
+        instance.collect({
+          category: CATEGORY.ERROR,
+          type: ErrorType.ERROR,
+          error: e as ErrorEvent,
+          url: getCurrentLocationHref(),
+          timeStamp: Date.now(),
+        });
+      }
     }
   }
 
