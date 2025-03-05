@@ -257,34 +257,34 @@ function rewriteXHR(
         (string | null | undefined)?,
       ]
   ): void {
-    this["_hawkeye_url"] = args[1];
-    this["_hawkeye_method"] = args[0];
+    this["_falcon_url"] = args[1];
+    this["_falcon_method"] = args[0];
     originOpen.apply(this, args);
   };
 
   xhrProto.send = function send(
     body?: Document | XMLHttpRequestBodyInit | null | undefined
   ): void {
-    if (!this["_hawkeye_url"]) {
+    if (!this["_falcon_url"]) {
       return;
     }
     let isProcess = false;
     if (
       !isEmpty(instance.config.endpoint as string) &&
-      this["_hawkeye_url"].indexOf(instance.config.endpoint as string) !== -1
+      this["_falcon_url"].indexOf(instance.config.endpoint as string) !== -1
     ) {
       return originSend.call(this, body);
     }
 
-    const method = this["_hawkeye_method"].toUpperCase();
+    const method = this["_falcon_method"].toUpperCase();
     let params: string;
     if (method == "GET") {
       let searchParams: URLSearchParams;
       try {
-        searchParams = new URL(this["_hawkeye_url"]).searchParams;
+        searchParams = new URL(this["_falcon_url"]).searchParams;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch(e) {
-        searchParams = new URL('http://xxx.com'+this["_hawkeye_url"]).searchParams;
+        searchParams = new URL('http://xxx.com'+this["_falcon_url"]).searchParams;
       }
       params = parseQueryStringToObjectString(searchParams);
     } else {
@@ -300,7 +300,7 @@ function rewriteXHR(
         return;
       }
       const { status, statusText, response } = this;
-      if (this["_hawkeye_url"].indexOf(instance.config.endpoint) !== -1) {
+      if (this["_falcon_url"].indexOf(instance.config.endpoint) !== -1) {
         return;
       }
 
@@ -312,7 +312,7 @@ function rewriteXHR(
         message: response,
       };
 
-      _collect(this["_hawkeye_url"], res, {
+      _collect(this["_falcon_url"], res, {
         params,
         method,
       }, true);
@@ -330,11 +330,11 @@ function rewriteXHR(
         };
 
         // 不收集上报异常
-        if(this["_hawkeye_url"].indexOf(instance.config.endpoint as string) !== -1) {
+        if(this["_falcon_url"].indexOf(instance.config.endpoint as string) !== -1) {
           return;
         }
 
-        _collect(this["_hawkeye_url"], res, {
+        _collect(this["_falcon_url"], res, {
           params,
           method,
         }, false);
